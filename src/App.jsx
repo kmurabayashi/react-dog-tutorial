@@ -37,7 +37,6 @@ function Gallery(props) {
     return (
         <div className="columns is-vcentered is-multiline">
             {urls.map((url) => {
-                console.log(url.name)
                 return (
                     <div key={url.name} className="column is-3">
                         <Image src={url.name}/>
