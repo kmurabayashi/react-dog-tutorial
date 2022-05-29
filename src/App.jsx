@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchImages } from "./api";
+import Data from '../data.json';
+
 function Header() {
     return (
         <header className="hero is-dark is-bold">
@@ -17,7 +19,7 @@ function Image(props) {
         <div className="card">
             <div className="card-image">
                 <figure className="image">
-                    <img src={props.src} alt="cute dog!" />
+                    <img src={`picture/Dropbox/test/${props.src}`} alt="cute dog!" />
                 </figure>
             </div>
         </div>
@@ -35,9 +37,10 @@ function Gallery(props) {
     return (
         <div className="columns is-vcentered is-multiline">
             {urls.map((url) => {
+                console.log(url.name)
                 return (
-                    <div key={url} className="column is-3">
-                        <Image src={url}/>
+                    <div key={url.name} className="column is-3">
+                        <Image src={url.name}/>
                     </div>
                 );
             })}
@@ -76,11 +79,15 @@ function Form(props) {
 
 function Main() {
     const [urls, setUrls] = useState(null);
+    // setUrls(Data.picture)
     useEffect(() => {
-        fetchImages("shiba").then((urls) => {
-            setUrls(urls);
-        });
-    }, []);
+        setUrls(Data.picture)
+    },[]);
+    // useEffect(() => {
+    //     fetchImages("shiba").then((urls) => {
+    //         setUrls(urls);
+    //     });
+    // }, []);
     function reloadImages(breed) {
         fetchImages(breed).then((urls) => {
             setUrls(urls);
